@@ -1,10 +1,15 @@
-### Librerias
+#!/usr/bin/env python
+"""algoritmo.py by Jorge Mauricio, 2016-02-15
+This program calculate the Degrees Days of a database file.
+"""
+
+### Library
 import math
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-### Funciones
+### Functions
 
 #	Metodo residual
 
@@ -52,10 +57,10 @@ def metodoTrianguloSimple(tmax, tmin):
 # 	Metodo seno simple
 
 # 	Subrutina para metodo del seno simple
-def sinec(suma, diff, fk1):
+def sinec(suma, diff, temp1):
 	twopi = 6.2834
 	pihlf = 1.5708
-	d2 = fk1 - suma
+	d2 = temp1 - suma
 	d3 = diff * diff
 	d4 = d2 * d2
 	d5 = math.sqrt(d3 - d4)
@@ -73,22 +78,21 @@ def metodoSenoSimple(tmax, tmin):
 		if (tmax <= umbralInferior):
 			gdd = 0.0
 		else:
-			fk1 = 2 * umbralInferior
+			temp1 = 2 * umbralInferior
 			diff = tmax - tmin
 			suma = tmax + tmin
 			if (tmin >= umbralInferior):
-				gdd = (suma - fk1) / 2
+				gdd = (suma - temp1) / 2
 			else:
-				gdd = sinec(suma, diff, fk1)
+				gdd = sinec(suma, diff, temp1)
 			if (tmax > umbralSuperior):
-				fk1 = 2 * umbralSuperior
+				temp1 = 2 * umbralSuperior
 				gdd2 = gdd
-				gdd = sinec(suma, diff, fk1)
+				gdd = sinec(suma, diff, temp1)
 				gdd = gdd2 - gdd
 	return gdd
 
 # 	Leer archivo .csv
-
 data = pd.read_csv('data/datos.csv')
 print(data.head())
 
@@ -96,9 +100,10 @@ print(data.head())
 
 print ("*************************************************************")
 print ("*****      Programa para calcular grados-dias en Python *****")
-print ("*****      Metodo Residual                              *****")
-print ("*****      Metodo Triangulo Simple                      *****")
-print ("*****      Metodo Seno Simple                           *****")
+print ("*****      Métodos:                                     *****")
+print ("*****      + Residual                                   *****")
+print ("*****      + Triangulo Simple                           *****")
+print ("*****      + Metodo Seno Simple                         *****")
 print ("*************************************************************")
 
 # 	limites
