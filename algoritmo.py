@@ -6,7 +6,6 @@ This program calculate the Degrees Days of a database file.
 ### Library
 import math
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 
 ### Functions
@@ -94,13 +93,12 @@ def metodoSenoSimple(tmax, tmin):
 
 # 	Leer archivo .csv
 data = pd.read_csv('data/datos.csv')
-print(data.head())
 
 # 	Solicitar al usuario los umbrales del cultivo
 
 print ("*************************************************************")
 print ("*****      Programa para calcular grados-dias en Python *****")
-print ("*****      Métodos:                                     *****")
+print ("*****      Metodos:                                     *****")
 print ("*****      + Residual                                   *****")
 print ("*****      + Triangulo Simple                           *****")
 print ("*****      + Metodo Seno Simple                         *****")
@@ -127,9 +125,5 @@ if (umbralSuperior >= umbralInferior):
 	data['GDDTS'] = data.apply(lambda row: metodoTrianguloSimple(row['tmax'], row['tmin']), axis=1)
 	data['GDDSS'] = data.apply(lambda row: metodoSenoSimple(row['tmax'], row['tmin']), axis=1)
 	data.to_csv('data/datos_procesados.csv', sep=',')
-	
-	my_plot = data.plot()
-	fig = my_plot.get_figure()
-	fig.savefig('data/graph.png')
 else:
 	print ("Error \nLimite inferior mayor al superior")	
