@@ -1,8 +1,8 @@
-### Librerias
+#	Librerias
 import math
 import pandas as pd
 
-### Funciones
+# 	Funciones
 
 #	Metodo residual
 
